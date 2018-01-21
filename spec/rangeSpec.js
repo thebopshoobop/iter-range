@@ -47,4 +47,62 @@ describe("The range function", () => {
       });
     });
   });
+
+  describe("when accesssing additional properties and methods,", () => {
+    describe("when calculating its length,", () => {
+      it("should handle a single parameter", () => {
+        expect(range(10).length).toEqual(10);
+      });
+
+      it("should handle start and end params", () => {
+        expect(range(10, 100).length).toEqual(90);
+      });
+
+      it("should handle a custom interval", () => {
+        expect(range(5, 50, 5).length).toEqual(9);
+      });
+
+      it("should handle a negative interval", () => {
+        expect(range(55, 22, -6).length).toEqual(6);
+      });
+
+      it("should handle an invalid range", () => {
+        expect(range(40, 20).length).toEqual(0);
+      });
+    });
+
+    describe("when using the map method,", () => {
+      let callback;
+      beforeEach(() => {
+        callback = jasmine.createSpy("mapCallback");
+      });
+
+      it("should call the callback for each element", () => {
+        range(5).map(callback);
+
+        expect(callback).toHaveBeenCalledTimes(5);
+      });
+
+      it("should pass the index and the range to the callback", () => {
+        const r = range(5, 10);
+        r.map(callback);
+
+        expect(callback).toHaveBeenCalledWith(8, 3, r);
+      });
+
+      it("should assign the range `this` by default", () => {
+        const r = range(22, 33, 0.25);
+
+        r.map(function() {
+          expect(this).toBe(r);
+        });
+      });
+
+      it("should properly assign `this` when given one", () => {
+        range(6, 10).map(function() {
+          expect(this).toBe(callback);
+        }, callback);
+      });
+    });
+  });
 });
