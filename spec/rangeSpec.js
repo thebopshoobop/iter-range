@@ -282,5 +282,52 @@ describe("The range function", () => {
         expect(range(1, 11, 2).some(i => i % 2 === 0)).toEqual(false);
       });
     });
+
+    describe("when using the filter method,", () => {
+      let spy;
+      beforeEach(() => {
+        spy = jasmine.createSpyObj("filterSpy", { every: true, none: false });
+      });
+
+      it("should check every element", () => {
+        range(5).filter(spy.none);
+
+        expect(spy.none).toHaveBeenCalledTimes(5);
+      });
+
+      it("should return elements that are truthy", () => {
+        expect(range(9).filter(spy.every)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+      });
+
+      it("should not return falsy elements", () => {
+        expect(range(9).filter(spy.none)).toEqual([]);
+      });
+
+      it("should pass the index and the range to the filter callback", () => {
+        const r = range(2, 12, 2);
+        r.filter(spy.none);
+
+        expect(spy.none).toHaveBeenCalledWith(8, 3, r);
+      });
+
+      it("should default `this` to the range in the filter callback", () => {
+        const r = range(12, 5 - 2);
+
+        r.filter(function() {
+          expect(this).toBe(r);
+        });
+      });
+
+      it("should assign `this` in the filter callback when given one", () => {
+        range(6, 10).filter(function() {
+          expect(this).toBe(spy.every);
+        }, spy.every);
+      });
+
+      it("should filter elements", () => {
+        expect(range(0, 7).filter(i => i % 2 === 0)).toEqual([0, 2, 4, 6]);
+        expect(range(1, 11, 2).filter(i => i % 2 === 0)).toEqual([]);
+      });
+    });
   });
 });
