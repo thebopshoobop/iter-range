@@ -4,7 +4,7 @@
   "description": "An iterator-based range library that's here for you.",
   "main": "lib/range.js",
   "scripts": {
-    "test": "node ./node_modules/jasmine/bin/jasmine"
+    "test": "node ./node_modules/.bin/jasmine"
   },
   "repository": {
     "type": "git",
