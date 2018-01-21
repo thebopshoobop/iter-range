@@ -354,5 +354,53 @@ describe("The range function", () => {
         expect(range(1, 11, 2).find(i => i % 2 === 0)).toEqual(undefined);
       });
     });
+
+    describe("when using the findIndex method,", () => {
+      it("should call the findIndex callback as many times as needed", () => {
+        range(5).findIndex(spy.none);
+
+        expect(spy.none).toHaveBeenCalledTimes(5);
+      });
+
+      it("should call the findIndex callback as few times as needed", () => {
+        range(5).findIndex(spy.every);
+
+        expect(spy.every).toHaveBeenCalledTimes(1);
+      });
+
+      it("should return the index of the first truthy element", () => {
+        expect(range(9).findIndex(spy.every)).toEqual(0);
+      });
+
+      it("should return -1 if all elements are falsy", () => {
+        expect(range(9).findIndex(spy.none)).toEqual(-1);
+      });
+
+      it("should pass the index and range to the findIndex callback", () => {
+        const r = range(2, 12, 2);
+        r.findIndex(spy.none);
+
+        expect(spy.none).toHaveBeenCalledWith(8, 3, r);
+      });
+
+      it("should default `this` to the range in the findIndex callback", () => {
+        const r = range(12, 5 - 2);
+
+        r.findIndex(function() {
+          expect(this).toBe(r);
+        });
+      });
+
+      it("should assign a given `this` in the findIndex callback", () => {
+        range(6, 10).findIndex(function() {
+          expect(this).toBe(spy.every);
+        }, spy.every);
+      });
+
+      it("should find the index of elements", () => {
+        expect(range(1, 7).findIndex(i => i % 4 === 0)).toEqual(3);
+        expect(range(1, 11, 2).findIndex(i => i % 2 === 0)).toEqual(-1);
+      });
+    });
   });
 });
