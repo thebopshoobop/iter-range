@@ -176,5 +176,58 @@ describe("The range function", () => {
         expect(range(5).reduce((sum, i) => sum + i, 0)).toEqual(10);
       });
     });
+
+    describe("when using the every method,", () => {
+      let spy;
+      beforeEach(() => {
+        spy = jasmine.createSpyObj("everySpy", { every: true, none: false });
+      });
+
+      it("should check every element, if necessary", () => {
+        range(5).every(spy.every);
+
+        expect(spy.every).toHaveBeenCalledTimes(5);
+      });
+
+      it("should return true if every element does", () => {
+        expect(range(10).every(spy.every)).toEqual(true);
+      });
+
+      it("should not check every element if not necessary", () => {
+        range(5).every(spy.none);
+
+        expect(spy.none).toHaveBeenCalledTimes(1);
+      });
+
+      it("should return false if any item does", () => {
+        expect(range(9).every(spy.none)).toEqual(false);
+      });
+
+      it("should pass the index and the range to the every callback", () => {
+        const r = range(5, 10);
+        r.every(spy.every);
+
+        expect(spy.every).toHaveBeenCalledWith(7, 2, r);
+      });
+
+      it("should default `this` to the range in the every callback", () => {
+        const r = range(22, 33, 0.25);
+
+        r.every(function() {
+          expect(this).toBe(r);
+        });
+      });
+
+      it("should assign `this` in the every callback when given one", () => {
+        range(6, 10).every(function() {
+          expect(this).toBe(spy.every);
+        }, spy.every);
+      });
+
+      it("should check every element", () => {
+        expect(range(0, 10, 2).every(i => i % 2 === 0)).toEqual(true);
+        expect(range(0, 10).every(i => i % 2 === 0)).toEqual(false);
+      });
+    });
   });
 });
