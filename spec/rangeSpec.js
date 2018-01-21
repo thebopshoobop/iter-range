@@ -77,20 +77,20 @@ describe("The range function", () => {
         callback = jasmine.createSpy("mapCallback");
       });
 
-      it("should call the callback for each element", () => {
+      it("should map the callback over each element", () => {
         range(5).map(callback);
 
         expect(callback).toHaveBeenCalledTimes(5);
       });
 
-      it("should pass the index and the range to the callback", () => {
+      it("should pass the index and the range to the map callback", () => {
         const r = range(5, 10);
         r.map(callback);
 
         expect(callback).toHaveBeenCalledWith(8, 3, r);
       });
 
-      it("should assign the range `this` by default", () => {
+      it("should default `this` to the range in the map callback", () => {
         const r = range(22, 33, 0.25);
 
         r.map(function() {
@@ -98,10 +98,14 @@ describe("The range function", () => {
         });
       });
 
-      it("should properly assign `this` when given one", () => {
+      it("should assign `this` in the map callback when given one", () => {
         range(6, 10).map(function() {
           expect(this).toBe(callback);
         }, callback);
+      });
+
+      it("should return a mapped array", () => {
+        expect(range(5).map(i => i ** 2)).toEqual([0, 1, 4, 9, 16]);
       });
     });
   });
