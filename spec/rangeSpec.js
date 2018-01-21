@@ -56,6 +56,13 @@ describe("The range function", () => {
   });
 
   describe("when accesssing additional properties and methods,", () => {
+    let callback;
+    let spy;
+    beforeEach(() => {
+      callback = jasmine.createSpy();
+      spy = jasmine.createSpyObj({ every: true, none: false });
+    });
+
     describe("when calculating its length,", () => {
       it("should handle a single parameter", () => {
         expect(range(10).length).toEqual(10);
@@ -79,11 +86,6 @@ describe("The range function", () => {
     });
 
     describe("when using the map method,", () => {
-      let callback;
-      beforeEach(() => {
-        callback = jasmine.createSpy("mapCallback");
-      });
-
       it("should map the callback over each element", () => {
         range(5).map(callback);
 
@@ -117,11 +119,6 @@ describe("The range function", () => {
     });
 
     describe("when using the forEach method,", () => {
-      let callback;
-      beforeEach(() => {
-        callback = jasmine.createSpy("forEachCallback");
-      });
-
       it("should call the callback for each element", () => {
         range(5).forEach(callback);
 
@@ -151,11 +148,6 @@ describe("The range function", () => {
     });
 
     describe("when using the reduce method,", () => {
-      let callback;
-      beforeEach(() => {
-        callback = jasmine.createSpy("reduceCallback");
-      });
-
       it("should reduce the callback over each element", () => {
         range(5).reduce(callback);
 
@@ -171,18 +163,13 @@ describe("The range function", () => {
 
       it("should reduce the given range", () => {
         const r = range(5).reduce((n, i) => ({ ...n, [i]: i % 2 === 0 }), {});
-        expect(r).toEqual({ 0: true, 1: false, 2: true, 3: false, 4: true });
 
+        expect(r).toEqual({ 0: true, 1: false, 2: true, 3: false, 4: true });
         expect(range(5).reduce((sum, i) => sum + i, 0)).toEqual(10);
       });
     });
 
     describe("when using the every method,", () => {
-      let spy;
-      beforeEach(() => {
-        spy = jasmine.createSpyObj("everySpy", { every: true, none: false });
-      });
-
       it("should check every element, if necessary", () => {
         range(5).every(spy.every);
 
@@ -231,12 +218,7 @@ describe("The range function", () => {
     });
 
     describe("when using the some method,", () => {
-      let spy;
-      beforeEach(() => {
-        spy = jasmine.createSpyObj("someSpy", { every: true, none: false });
-      });
-
-      it("should check every element, if necessary", () => {
+      it("should call the some callback for every element if necessary", () => {
         range(5).some(spy.none);
 
         expect(spy.none).toHaveBeenCalledTimes(5);
@@ -246,7 +228,7 @@ describe("The range function", () => {
         expect(range(10).some(spy.every)).toEqual(true);
       });
 
-      it("should not check every element if not necessary", () => {
+      it("should call the some callback as few times as possible", () => {
         range(5).some(spy.every);
 
         expect(spy.every).toHaveBeenCalledTimes(1);
@@ -284,12 +266,7 @@ describe("The range function", () => {
     });
 
     describe("when using the filter method,", () => {
-      let spy;
-      beforeEach(() => {
-        spy = jasmine.createSpyObj("filterSpy", { every: true, none: false });
-      });
-
-      it("should check every element", () => {
+      it("should call the filter callback for every element", () => {
         range(5).filter(spy.none);
 
         expect(spy.none).toHaveBeenCalledTimes(5);
