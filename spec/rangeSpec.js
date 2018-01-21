@@ -13,6 +13,13 @@ describe("The range function", () => {
       }
     });
 
+    it("should be consumable more than once", () => {
+      const r = range(10);
+
+      expect([...r]).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+      expect([...r]).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    });
+
     it("should treat a single parameter as a max and start from 0", () => {
       expect([...range(8)]).toEqual([0, 1, 2, 3, 4, 5, 6, 7]);
     });
