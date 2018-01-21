@@ -229,5 +229,58 @@ describe("The range function", () => {
         expect(range(0, 10).every(i => i % 2 === 0)).toEqual(false);
       });
     });
+
+    describe("when using the some method,", () => {
+      let spy;
+      beforeEach(() => {
+        spy = jasmine.createSpyObj("someSpy", { every: true, none: false });
+      });
+
+      it("should check every element, if necessary", () => {
+        range(5).some(spy.none);
+
+        expect(spy.none).toHaveBeenCalledTimes(5);
+      });
+
+      it("should return true if any element does", () => {
+        expect(range(10).some(spy.every)).toEqual(true);
+      });
+
+      it("should not check every element if not necessary", () => {
+        range(5).some(spy.every);
+
+        expect(spy.every).toHaveBeenCalledTimes(1);
+      });
+
+      it("should return false if no item does", () => {
+        expect(range(9).some(spy.none)).toEqual(false);
+      });
+
+      it("should pass the index and the range to the some callback", () => {
+        const r = range(5, 10);
+        r.some(spy.none);
+
+        expect(spy.none).toHaveBeenCalledWith(9, 4, r);
+      });
+
+      it("should default `this` to the range in the some callback", () => {
+        const r = range(22, 33, 0.25);
+
+        r.some(function() {
+          expect(this).toBe(r);
+        });
+      });
+
+      it("should assign `this` in the some callback when given one", () => {
+        range(6, 10).some(function() {
+          expect(this).toBe(spy.every);
+        }, spy.every);
+      });
+
+      it("should check some elements", () => {
+        expect(range(0, 10, 2).some(i => i % 2 === 0)).toEqual(true);
+        expect(range(1, 11, 2).some(i => i % 2 === 0)).toEqual(false);
+      });
+    });
   });
 });
