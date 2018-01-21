@@ -306,5 +306,53 @@ describe("The range function", () => {
         expect(range(1, 11, 2).filter(i => i % 2 === 0)).toEqual([]);
       });
     });
+
+    describe("when using the find method,", () => {
+      it("should check every element if necessary", () => {
+        range(5).find(spy.none);
+
+        expect(spy.none).toHaveBeenCalledTimes(5);
+      });
+
+      it("should check the minimum elements", () => {
+        range(5).find(spy.every);
+
+        expect(spy.every).toHaveBeenCalledTimes(1);
+      });
+
+      it("should return the first truthy element", () => {
+        expect(range(9).find(spy.every)).toEqual(0);
+      });
+
+      it("should return undefined if all elements are falsy", () => {
+        expect(range(9).find(spy.none)).toEqual(undefined);
+      });
+
+      it("should pass the index and the range to the find callback", () => {
+        const r = range(2, 12, 2);
+        r.find(spy.none);
+
+        expect(spy.none).toHaveBeenCalledWith(8, 3, r);
+      });
+
+      it("should default `this` to the range in the find callback", () => {
+        const r = range(12, 5 - 2);
+
+        r.find(function() {
+          expect(this).toBe(r);
+        });
+      });
+
+      it("should assign `this` in the find callback when given one", () => {
+        range(6, 10).find(function() {
+          expect(this).toBe(spy.every);
+        }, spy.every);
+      });
+
+      it("should find elements", () => {
+        expect(range(1, 7).find(i => i % 4 === 0)).toEqual(4);
+        expect(range(1, 11, 2).find(i => i % 2 === 0)).toEqual(undefined);
+      });
+    });
   });
 });
