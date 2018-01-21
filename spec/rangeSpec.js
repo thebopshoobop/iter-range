@@ -108,5 +108,66 @@ describe("The range function", () => {
         expect(range(5).map(i => i ** 2)).toEqual([0, 1, 4, 9, 16]);
       });
     });
+
+    describe("when using the forEach method,", () => {
+      let callback;
+      beforeEach(() => {
+        callback = jasmine.createSpy("forEachCallback");
+      });
+
+      it("should call the callback for each element", () => {
+        range(5).forEach(callback);
+
+        expect(callback).toHaveBeenCalledTimes(5);
+      });
+
+      it("should pass the index and the range to the forEach callback", () => {
+        const r = range(5, 10);
+        r.forEach(callback);
+
+        expect(callback).toHaveBeenCalledWith(8, 3, r);
+      });
+
+      it("should default `this` to the range in the forEach callback", () => {
+        const r = range(22, 33, 0.25);
+
+        r.forEach(function() {
+          expect(this).toBe(r);
+        });
+      });
+
+      it("should assign `this` in the forEach callback when given one", () => {
+        range(6, 10).forEach(function() {
+          expect(this).toBe(callback);
+        }, callback);
+      });
+    });
+
+    describe("when using the reduce method,", () => {
+      let callback;
+      beforeEach(() => {
+        callback = jasmine.createSpy("reduceCallback");
+      });
+
+      it("should reduce the callback over each element", () => {
+        range(5).reduce(callback);
+
+        expect(callback).toHaveBeenCalledTimes(5);
+      });
+
+      it("should pass the index and the range to the reduce callback", () => {
+        const r = range(5, 10);
+        r.reduce(callback);
+
+        expect(callback).toHaveBeenCalledWith(undefined, 8, 3, r);
+      });
+
+      it("should reduce the given range", () => {
+        const r = range(5).reduce((n, i) => ({ ...n, [i]: i % 2 === 0 }), {});
+        expect(r).toEqual({ 0: true, 1: false, 2: true, 3: false, 4: true });
+
+        expect(range(5).reduce((sum, i) => sum + i, 0)).toEqual(10);
+      });
+    });
   });
 });
