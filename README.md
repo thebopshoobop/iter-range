@@ -35,8 +35,8 @@ console.log(...range(27, 8, -4.5)); //=> 27 22.5 18 13.5 9
 
 // The iterator resets when consumed:
 const r = range(3);
-console.log(...r); //=> [0, 1, 2]
-console.log(...r); //=> [0, 1, 2]
+console.log(...r); //=> 0 1 2
+console.log(...r); //=> 0 1 2
 ```
 
 Additionally, `Range` objects have three of the standard Array functional iteration methods:
@@ -75,7 +75,7 @@ If you need a refresher, you should check the [MDN Array documentation](https://
 const { derange } = require("iter-range");
 console.log(derange(3, 13, 3).length); //=> 4
 console.log(...derange(5).reverse()); //=> 4 3 2 1 0
-console.log(...derange(8).filter(i => i % 2 === 0)); //=> 0 2 4 6
+console.log(derange(8).filter(i => i % 2 === 0)); //=> [0, 2, 4, 6]
 ```
 
 ## Testing
