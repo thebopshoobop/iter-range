@@ -149,7 +149,7 @@ describe("The range function", () => {
 
     describe("when using the reduce method,", () => {
       it("should reduce the callback over each element", () => {
-        range(5).reduce(callback);
+        range(5).reduce(callback, 0);
 
         expect(callback).toHaveBeenCalledTimes(5);
       });
@@ -166,6 +166,14 @@ describe("The range function", () => {
 
         expect(r).toEqual({ 0: true, 1: false, 2: true, 3: false, 4: true });
         expect(range(5).reduce((sum, i) => sum + i, 0)).toEqual(10);
+      });
+
+      it("should use the first item if no accumulator is given", () => {
+        const r = range(5);
+        r.reduce(callback);
+
+        expect(callback).toHaveBeenCalledWith(0, 1, 1, r);
+        expect(range(5).reduce((sum, i) => sum + i)).toEqual(10);
       });
     });
 
