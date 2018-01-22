@@ -73,9 +73,9 @@ If you need a refresher, you should check the [MDN Array documentation](https://
 
 ```js
 const { derange } = require("iter-range");
-console.log(range(3, 13, 3).length); //=> 4
-console.log(...range(5).reverse()); //=> 4 3 2 1 0
-console.log(...range(8).filter(i => i % 2 === 0)); //=> 0 2 4 6
+console.log(derange(3, 13, 3).length); //=> 4
+console.log(...derange(5).reverse()); //=> 4 3 2 1 0
+console.log(...derange(8).filter(i => i % 2 === 0)); //=> 0 2 4 6
 ```
 
 ## Testing
