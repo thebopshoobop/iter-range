@@ -2,7 +2,7 @@
   "name": "iter-range",
   "version": "0.0.1",
   "description": "An iterator-based range library that's here for you.",
-  "main": "lib/range.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "node ./node_modules/.bin/jasmine"
   },
