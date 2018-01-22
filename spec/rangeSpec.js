@@ -466,5 +466,30 @@ describe("The range function", () => {
         expect([...range(10, 0, -2).reverse()]).toEqual([2, 4, 6, 8, 10]);
       });
     });
+
+    describe("when using the lastIndexOf method,", () => {
+      it("shoud return the last index of included members", () => {
+        expect(range(12, 24).lastIndexOf(18)).toEqual(6);
+      });
+
+      it("should return -1 for non-included items", () => {
+        expect(range(12, 22).lastIndexOf(4)).toEqual(-1);
+      });
+
+      it("should accpet a fromIndex parameter to reverse search from", () => {
+        expect(range(5, 10).lastIndexOf(6, 4)).toEqual(1);
+        expect(range(5, 10).lastIndexOf(9, 3)).toEqual(-1);
+      });
+
+      it("should handle too-large fromIndex params", () => {
+        expect(range(5, 10).lastIndexOf(7, 10)).toEqual(2);
+      });
+
+      it("should handle a negative fromIndex", () => {
+        expect(range(5, 10).lastIndexOf(6, -2)).toEqual(1);
+        expect(range(5, 10).lastIndexOf(9, -3)).toEqual(-1);
+        expect(range(10).lastIndexOf(4, -12)).toEqual(-1);
+      });
+    });
   });
 });
