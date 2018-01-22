@@ -402,5 +402,20 @@ describe("The range function", () => {
         expect(range(1, 11, 2).findIndex(i => i % 2 === 0)).toEqual(-1);
       });
     });
+
+    describe("when using the indexOf method", () => {
+      it("should return the index of included numbers", () => {
+        expect(range(0, 10, 2).indexOf(6)).toEqual(3);
+      });
+
+      it("should return -1 for non-included numbers", () => {
+        expect(range(0, 10, 2).indexOf(5)).toEqual(-1);
+      });
+
+      it("should accept and start from a fromIndex parameter", () => {
+        expect(range(5).indexOf(4, 2)).toEqual(4);
+        expect(range(10).indexOf(4, 5)).toEqual(-1);
+      });
+    });
   });
 });
