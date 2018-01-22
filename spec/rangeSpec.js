@@ -499,5 +499,38 @@ describe("The range function", () => {
         expect(range(10).lastIndexOf(4, -12)).toEqual(-1);
       });
     });
+
+    describe("when using the reduceRight method", () => {
+      it("should reduce the callback over each element in reverse", () => {
+        range(5).reduceRight(callback, 0);
+
+        expect(callback).toHaveBeenCalledTimes(5);
+      });
+
+      it("should pass the index and range to the reduceRight callback", () => {
+        const r = range(5, 10);
+        r.reduceRight(callback, 0);
+
+        expect(callback).toHaveBeenCalledWith(undefined, 8, 3, r);
+      });
+
+      it("should reduce the range", () => {
+        const r = range(5).reduceRight(
+          (n, i) => ({ ...n, [i]: i % 2 === 0 }),
+          {}
+        );
+
+        expect(r).toEqual({ 0: true, 1: false, 2: true, 3: false, 4: true });
+        expect(range(5).reduceRight((sum, i) => sum + i, 0)).toEqual(10);
+      });
+
+      it("should use the last item if no accumulator is given", () => {
+        const r = range(5);
+        r.reduceRight(callback);
+
+        expect(callback).toHaveBeenCalledWith(4, 3, 3, r);
+        expect(range(5).reduceRight((sum, i) => sum + i)).toEqual(10);
+      });
+    });
   });
 });
