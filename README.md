@@ -48,7 +48,7 @@ Additionally, `Range` objects have three of the standard Array functional iterat
 ```js
 const { range } = require("iter-range");
 console.log(range(3).map(i => i ** 3)); //=> [0, 8, 27]
-console.log(range(4).map((i, index) => [index])); //=> [[0], [1], [2], [3]]
+console.log(range(3, 6).map((i, index) => [i, index])); //=> [[3, 0], [4, 1], [5, 2]]
 ```
 
 These methods are all written to consume the iterator rather than creating an array to iterate over (`map`, of course, builds an array to return).
