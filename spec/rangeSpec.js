@@ -403,9 +403,10 @@ describe("The range function", () => {
       });
     });
 
-    describe("when using the indexOf method", () => {
+    describe("when using the indexOf method,", () => {
       it("should return the index of included numbers", () => {
         expect(range(0, 10, 2).indexOf(6)).toEqual(3);
+        expect(range(10, 0, -2).indexOf(6)).toEqual(2);
       });
 
       it("should return -1 for non-included numbers", () => {
@@ -423,9 +424,10 @@ describe("The range function", () => {
       });
     });
 
-    describe("when using the includes method", () => {
+    describe("when using the includes method,", () => {
       it("should return true for included numbers", () => {
         expect(range(0, 10, 2).includes(6)).toEqual(true);
+        expect(range(10, 0, -2).includes(6)).toEqual(true);
       });
 
       it("should return false for non-included numbers", () => {
@@ -443,7 +445,7 @@ describe("The range function", () => {
       });
     });
 
-    describe("when using the reverse method", () => {
+    describe("when using the reverse method,", () => {
       it("should not reverse the original range", () => {
         const r = range(8);
         r.reverse();
