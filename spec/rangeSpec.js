@@ -417,5 +417,20 @@ describe("The range function", () => {
         expect(range(10).indexOf(4, 5)).toEqual(-1);
       });
     });
+
+    describe("when using the includes method", () => {
+      it("should return true for included numbers", () => {
+        expect(range(0, 10, 2).includes(6)).toEqual(true);
+      });
+
+      it("should return false for non-included numbers", () => {
+        expect(range(0, 10, 2).includes(5)).toEqual(false);
+      });
+
+      it("should accept a fromIndex parameter to begin inclusion check", () => {
+        expect(range(5).includes(4, 2)).toEqual(true);
+        expect(range(10).includes(4, 5)).toEqual(false);
+      });
+    });
   });
 });
