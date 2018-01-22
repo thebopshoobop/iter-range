@@ -416,6 +416,11 @@ describe("The range function", () => {
         expect(range(5).indexOf(4, 2)).toEqual(4);
         expect(range(10).indexOf(4, 5)).toEqual(-1);
       });
+
+      it("should treat a negative fromIndex as an offset from the end", () => {
+        expect(range(10).indexOf(8, -4)).toEqual(8);
+        expect(range(10).indexOf(3, -3)).toEqual(-1);
+      });
     });
 
     describe("when using the includes method", () => {
@@ -430,6 +435,11 @@ describe("The range function", () => {
       it("should accept a fromIndex parameter to begin inclusion check", () => {
         expect(range(5).includes(4, 2)).toEqual(true);
         expect(range(10).includes(4, 5)).toEqual(false);
+      });
+
+      it("should use a negative fromIndex as an offset from the end", () => {
+        expect(range(10).includes(8, -4)).toEqual(true);
+        expect(range(10).includes(3, -3)).toEqual(false);
       });
     });
 
