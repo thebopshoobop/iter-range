@@ -432,5 +432,25 @@ describe("The range function", () => {
         expect(range(10).includes(4, 5)).toEqual(false);
       });
     });
+
+    describe("when using the reverse method", () => {
+      it("should not reverse the original range", () => {
+        const r = range(8);
+        r.reverse();
+
+        expect([...r]).toEqual([0, 1, 2, 3, 4, 5, 6, 7]);
+      });
+
+      it("should return a new range", () => {
+        const r = range(5);
+
+        expect(r.reverse()).not.toBe(r);
+      });
+
+      it("should return a reversed range", () => {
+        expect([...range(6).reverse()]).toEqual([5, 4, 3, 2, 1, 0]);
+        expect([...range(10, 0, -2).reverse()]).toEqual([2, 4, 6, 8, 10]);
+      });
+    });
   });
 });
