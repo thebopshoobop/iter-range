@@ -76,6 +76,14 @@ describe("The derange function", () => {
       expect(derange(0, 10, 2).every(i => i % 2 === 0)).toEqual(true);
       expect(derange(0, 10).every(i => i % 2 === 0)).toEqual(false);
     });
+
+    it("should reset the iterator if not every element matches", () => {
+      const r = derange(5);
+
+      expect(r.every(i => i >= 2)).toBe(false);
+      expect(r.every(i => i >= 2)).toBe(false);
+      expect(r.every(i => i >= 2)).toBe(false);
+    });
   });
 
   describe("when using the some method,", () => {
@@ -123,6 +131,13 @@ describe("The derange function", () => {
     it("should check some elements", () => {
       expect(derange(0, 10, 2).some(i => i % 2 === 0)).toEqual(true);
       expect(derange(1, 11, 2).some(i => i % 2 === 0)).toEqual(false);
+    });
+
+    it("should reset the iterator if some element matches", () => {
+      const r = derange(1, 4);
+
+      expect(r.some(i => i % 2 === 0)).toBe(true);
+      expect(r.some(i => i % 2 === 0)).toBe(true);
     });
   });
 
@@ -214,6 +229,13 @@ describe("The derange function", () => {
       expect(derange(1, 7).find(i => i % 4 === 0)).toEqual(4);
       expect(derange(1, 11, 2).find(i => i % 2 === 0)).toEqual(undefined);
     });
+
+    it("should reset the iterator if a match is found", () => {
+      const r = derange(5);
+
+      expect(r.find(i => i === 3)).toBe(3);
+      expect(r.find(i => i === 3)).toBe(3);
+    });
   });
 
   describe("when using the findIndex method,", () => {
@@ -262,6 +284,13 @@ describe("The derange function", () => {
       expect(derange(1, 7).findIndex(i => i % 4 === 0)).toEqual(3);
       expect(derange(1, 11, 2).findIndex(i => i % 2 === 0)).toEqual(-1);
     });
+
+    it("should reset the iterator if a finIndex callback matches early", () => {
+      const r = derange(10, 0, -2);
+
+      expect(r.findIndex(i => i === 6)).toEqual(2);
+      expect(r.findIndex(i => i === 6)).toEqual(2);
+    });
   });
 
   describe("when using the indexOf method,", () => {
@@ -284,6 +313,13 @@ describe("The derange function", () => {
       expect(derange(10).indexOf(8, -4)).toEqual(8);
       expect(derange(10).indexOf(3, -3)).toEqual(-1);
     });
+
+    it("should reset the iterator if an index is found", () => {
+      const r = derange(6);
+
+      expect(r.indexOf(3)).toEqual(3);
+      expect(r.indexOf(3)).toEqual(3);
+    });
   });
 
   describe("when using the includes method,", () => {
@@ -305,6 +341,13 @@ describe("The derange function", () => {
     it("should use a negative fromIndex as an offset from the end", () => {
       expect(derange(10).includes(8, -4)).toEqual(true);
       expect(derange(10).includes(3, -3)).toEqual(false);
+    });
+
+    it("should reset the iterator if there is an includes match", () => {
+      const r = derange(10, 20);
+
+      expect(r.includes(13)).toEqual(true);
+      expect(r.includes(13)).toEqual(true);
     });
   });
 
@@ -350,6 +393,13 @@ describe("The derange function", () => {
       expect(derange(5, 10).lastIndexOf(6, -2)).toEqual(1);
       expect(derange(5, 10).lastIndexOf(9, -3)).toEqual(-1);
       expect(derange(10).lastIndexOf(4, -12)).toEqual(-1);
+    });
+
+    it("should reset the iterator when finding the last index", () => {
+      const r = derange(10);
+
+      expect(r.lastIndexOf(3)).toEqual(3);
+      expect(r.lastIndexOf(3)).toEqual(3);
     });
   });
 
