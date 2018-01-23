@@ -81,4 +81,4 @@ console.log(derange(8).filter(i => i % 2 === 0)); //=> [0, 2, 4, 6]
 
 ## Testing
 
-The `Range` and `Derange` objects are thoroughly tested to match their Array.prototype counterparts (except as noted). Please let me know if I've missed or wrongly implemented anything. You can run the tests by cloning the repository, and running [Jasmine](https://jasmine.github.io/). If you don't have it installed globally, you can simply `npm i` and then `npm test` will run the suite.
+The `Range` and `Derange` objects are thoroughly tested to match their Array.prototype counterparts (except as noted). Please let me know if I've missed or wrongly implemented anything. You can run the tests by cloning the repository, and running [Jasmine](https://jasmine.github.io/). If you don't have it installed globally, you can simply `$ npm i` and then `$ npm test` will run the suite. [Istanbul](https://istanbul.js.org/) is used to ensure complete test coverage. You can run the tests and generate a coverage report with `$ npm run coverage`.
