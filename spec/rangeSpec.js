@@ -55,6 +55,28 @@ describe("The range function", () => {
     });
   });
 
+  describe("when calculating its length,", () => {
+    it("should handle a single parameter", () => {
+      expect(range(10).length).toEqual(10);
+    });
+
+    it("should handle start and end params", () => {
+      expect(range(10, 100).length).toEqual(90);
+    });
+
+    it("should handle a custom interval", () => {
+      expect(range(5, 50, 5).length).toEqual(9);
+    });
+
+    it("should handle a negative interval", () => {
+      expect(range(55, 22, -6).length).toEqual(6);
+    });
+
+    it("should handle an invalid range", () => {
+      expect(range(40, 20).length).toEqual(0);
+    });
+  });
+
   describe("when accesssing it's iteration methods,", () => {
     let callback;
     let spy;
@@ -152,6 +174,25 @@ describe("The range function", () => {
 
         expect(callback).toHaveBeenCalledWith(0, 1, 1, r);
         expect(range(5).reduce((sum, i) => sum + i)).toEqual(10);
+      });
+
+      describe("when given an empty range,", () => {
+        it("should return the accumulator without calling the callback", () => {
+          expect(range(0, 10, -2).reduce(callback, spy)).toBe(spy);
+          expect(callback).not.toHaveBeenCalled();
+        });
+
+        it("should throw a TypeError if there is no accumulator", () => {
+          try {
+            range(3, 2).reduce(callback);
+          } catch (error) {
+            expect(error.name).toEqual("TypeError");
+            expect(callback).not.toHaveBeenCalled();
+            callback("caught");
+          } finally {
+            expect(callback).toHaveBeenCalledWith("caught");
+          }
+        });
       });
     });
   });

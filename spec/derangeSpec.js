@@ -8,28 +8,6 @@ describe("The derange function", () => {
     spy = jasmine.createSpyObj({ every: true, none: false });
   });
 
-  describe("when calculating its length,", () => {
-    it("should handle a single parameter", () => {
-      expect(derange(10).length).toEqual(10);
-    });
-
-    it("should handle start and end params", () => {
-      expect(derange(10, 100).length).toEqual(90);
-    });
-
-    it("should handle a custom interval", () => {
-      expect(derange(5, 50, 5).length).toEqual(9);
-    });
-
-    it("should handle a negative interval", () => {
-      expect(derange(55, 22, -6).length).toEqual(6);
-    });
-
-    it("should handle an invalid range", () => {
-      expect(derange(40, 20).length).toEqual(0);
-    });
-  });
-
   describe("when using the every method,", () => {
     it("should check every element, if necessary", () => {
       derange(5).every(spy.every);
@@ -433,6 +411,25 @@ describe("The derange function", () => {
 
       expect(callback).toHaveBeenCalledWith(4, 3, 3, r);
       expect(derange(5).reduceRight((sum, i) => sum + i)).toEqual(10);
+    });
+
+    describe("when given an empty range,", () => {
+      it("should return the accumulator without calling the callback", () => {
+        expect(derange(0, 10, -2).reduceRight(callback, spy)).toBe(spy);
+        expect(callback).not.toHaveBeenCalled();
+      });
+
+      it("should throw a TypeError if there is no accumulator", () => {
+        try {
+          derange(3, 2).reduce(callback);
+        } catch (error) {
+          expect(error.name).toEqual("TypeError");
+          expect(callback).not.toHaveBeenCalled();
+          callback("caught");
+        } finally {
+          expect(callback).toHaveBeenCalledWith("caught");
+        }
+      });
     });
   });
 });
