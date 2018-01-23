@@ -4,7 +4,8 @@
   "description": "An iterator-based range library that's here for you.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "node ./node_modules/.bin/jasmine"
+    "test": "node ./node_modules/.bin/jasmine",
+    "coverage": "node ./node_modules/.bin/nyc ./node_modules/.bin/jasmine"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,11 @@
   },
   "homepage": "https://github.com/thebopshoobop/iter-range#readme",
   "devDependencies": {
-    "jasmine": "^2.9.0"
+    "istanbul": "^0.4.5",
+    "jasmine": "^2.9.0",
+    "nyc": "^11.4.1"
+  },
+  "nyc": {
+    "exclude": ["spec"]
   }
 }
