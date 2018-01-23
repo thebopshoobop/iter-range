@@ -1,6 +1,6 @@
 {
   "name": "iter-range",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An iterator-based range library that's here for you.",
   "main": "lib/index.js",
   "scripts": {
@@ -23,6 +23,8 @@
     "nyc": "^11.4.1"
   },
   "nyc": {
-    "exclude": ["spec"]
+    "exclude": [
+      "spec"
+    ]
   }
 }
