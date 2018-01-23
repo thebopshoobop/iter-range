@@ -1,5 +1,7 @@
 # Iterator-Based `range`
 
+![test status](https://travis-ci.org/thebopshoobop/iter-range.svg?branch=master)
+
 ## Quickstart
 
 ```bash

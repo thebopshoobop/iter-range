@@ -5,7 +5,9 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "node ./node_modules/.bin/jasmine",
-    "coverage": "node ./node_modules/.bin/nyc ./node_modules/.bin/jasmine"
+    "coverage": "node ./node_modules/.bin/nyc ./node_modules/.bin/jasmine",
+    "report-coverage":
+      "node ./node_modules/.bin/nyc --reporter=lcov ./node_modules/.bin/jasmine > coverage.lcov"
   },
   "repository": {
     "type": "git",
@@ -23,8 +25,6 @@
     "nyc": "^11.4.1"
   },
   "nyc": {
-    "exclude": [
-      "spec"
-    ]
+    "exclude": ["spec"]
   }
 }
