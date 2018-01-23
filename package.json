@@ -7,7 +7,8 @@
     "lint": "node ./node_modules/.bin/eslint lib",
     "test": "node ./node_modules/.bin/jasmine",
     "coverage": "node ./node_modules/.bin/nyc ./node_modules/.bin/jasmine",
-    "report-coverage": "node ./node_modules/.bin/nyc --reporter=lcov ./node_modules/.bin/jasmine > coverage.lcov"
+    "report-coverage":
+      "node ./node_modules/.bin/nyc --reporter=lcov ./node_modules/.bin/jasmine > coverage.lcov && node ./node_modules/.bin/codecov"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/thebopshoobop/iter-range#readme",
   "devDependencies": {
+    "codecov": "^3.0.0",
     "eslint": "^4.16.0",
     "eslint-plugin-jasmine": "^2.9.1",
     "istanbul": "^0.4.5",
@@ -27,8 +29,6 @@
     "nyc": "^11.4.1"
   },
   "nyc": {
-    "exclude": [
-      "spec"
-    ]
+    "exclude": ["spec"]
   }
 }
