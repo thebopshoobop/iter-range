@@ -4,6 +4,7 @@
   "description": "An iterator-based range library that's here for you.",
   "main": "lib/index.js",
   "scripts": {
+    "lint": "node ./node_modules/.bin/eslint lib",
     "test": "node ./node_modules/.bin/jasmine",
     "coverage": "node ./node_modules/.bin/nyc ./node_modules/.bin/jasmine",
     "report-coverage": "node ./node_modules/.bin/nyc --reporter=lcov ./node_modules/.bin/jasmine > coverage.lcov"
@@ -19,6 +20,8 @@
   },
   "homepage": "https://github.com/thebopshoobop/iter-range#readme",
   "devDependencies": {
+    "eslint": "^4.16.0",
+    "eslint-plugin-jasmine": "^2.9.1",
     "istanbul": "^0.4.5",
     "jasmine": "^2.9.0",
     "nyc": "^11.4.1"

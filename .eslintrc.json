@@ -1,0 +1,15 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true,
+    "jasmine": true
+  },
+  "plugins": ["jasmine"],
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module"
+  },
+  "extends": ["eslint:recommended", "plugin:jasmine/recommended"]
+}
