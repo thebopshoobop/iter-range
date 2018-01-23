@@ -280,6 +280,8 @@ describe("The derange function", () => {
 
     it("should return -1 for non-included numbers", () => {
       expect(derange(0, 10, 2).indexOf(5)).toEqual(-1);
+      expect(derange(5).indexOf(10)).toEqual(-1);
+      expect(derange(5, 10).indexOf(2)).toEqual(-1);
     });
 
     it("should accept and start from a fromIndex parameter", () => {
@@ -421,7 +423,7 @@ describe("The derange function", () => {
 
       it("should throw a TypeError if there is no accumulator", () => {
         try {
-          derange(3, 2).reduce(callback);
+          derange(3, 2).reduceRight(callback);
         } catch (error) {
           expect(error.name).toEqual("TypeError");
           expect(callback).not.toHaveBeenCalled();
