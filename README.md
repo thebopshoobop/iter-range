@@ -10,7 +10,7 @@ $ npm i iter-range
 ```
 
 ```js
-const { range } = require("iter-range");
+const range = require("iter-range");
 range(4).forEach(() => console.log("#winning"));
 ```
 
