@@ -1,16 +1,14 @@
 {
   "name": "iter-range",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "An iterator-based range library that's here for you.",
   "main": "lib/index.js",
   "scripts": {
-    "doc":
-      "cat .README.md > README.md && node ./node_modules/.bin/jsdoc2md lib/range.js >> README.md",
+    "doc": "cat .README.md > README.md && node ./node_modules/.bin/jsdoc2md lib/range.js >> README.md",
     "lint": "node ./node_modules/.bin/eslint lib",
     "test": "node ./node_modules/.bin/jasmine",
     "coverage": "node ./node_modules/.bin/nyc ./node_modules/.bin/jasmine",
-    "report-coverage":
-      "node ./node_modules/.bin/nyc --reporter=lcov ./node_modules/.bin/jasmine > coverage.lcov && node ./node_modules/.bin/codecov"
+    "report-coverage": "node ./node_modules/.bin/nyc --reporter=lcov ./node_modules/.bin/jasmine > coverage.lcov && node ./node_modules/.bin/codecov"
   },
   "repository": {
     "type": "git",
@@ -32,6 +30,8 @@
     "nyc": "^11.4.1"
   },
   "nyc": {
-    "exclude": ["spec"]
+    "exclude": [
+      "spec"
+    ]
   }
 }
