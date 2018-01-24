@@ -72,7 +72,7 @@ console.log(range(2.5, -2.75, -0.25).includes(1)); //=> true
 
 These methods are all written to consume the iterator rather than creating an array to iterate over (`map`, of course, builds an array to return). If you need a refresher, you should check the [MDN Array documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). The important bit is that the callbacks (except for `reduce` and `reduceRight`, which get the accumulator first) will be called with three parameters: `currentValue`, `index`, and `Range`. The only difference is the third one. Since these methods don't construct an array to iterate over, there is no array to pass. Instead they pass the `Range` object as the third parameter. I hope that's helpful.
 
-Also note that negative values _are_ supported for `fromIndex`; they are treated as indexes from the _right_ side of the range). One other difference is that reverse does _not_ mutate the `Derange` it is called on, but instead returns a new instance.
+Also note that negative values _are_ supported for `fromIndex`; they are treated as indexes from the _right_ side of the range). One other difference is that reverse does _not_ mutate the `Range` it is called on, but instead just returns a new instance.
 
 ## Testing
 
