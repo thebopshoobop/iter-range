@@ -2,6 +2,7 @@
 
 [![build status](https://travis-ci.org/thebopshoobop/iter-range.svg?branch=master)](https://travis-ci.org/thebopshoobop/iter-range)
 [![code coverage](https://img.shields.io/codecov/c/github/thebopshoobop/iter-range.svg?maxAge=2592000)](https://codecov.io/gh/thebopshoobop/iter-range)
+[![documentation](https://inch-ci.org/github/thebopshoobop/iter-range.svg?branch=master&style=flat)](https://inch-ci.org/github/thebopshoobop/iter-range)
 
 ## Quickstart
 
