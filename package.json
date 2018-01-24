@@ -1,6 +1,6 @@
 {
   "name": "iter-range",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "An iterator-based range library that's here for you.",
   "main": "lib/index.js",
   "scripts": {
