@@ -1,4 +1,4 @@
-# Iterator-Based `range`
+# Iterable `range`
 
 [![build status](https://travis-ci.org/thebopshoobop/iter-range.svg?branch=master)](https://travis-ci.org/thebopshoobop/iter-range)
 [![code coverage](https://img.shields.io/codecov/c/github/thebopshoobop/iter-range.svg?maxAge=2592000)](https://codecov.io/gh/thebopshoobop/iter-range)
@@ -75,3 +75,257 @@ Also note that negative values _are_ supported for `fromIndex`; they are treated
 ## Testing
 
 The `Range` object methods are thoroughly tested to match their Array.prototype counterparts (except as noted). Please let me know if I've missed or wrongly implemented anything. You can run the tests by cloning the repository, and running [Jasmine](https://jasmine.github.io/). If you don't have it installed globally, you can simply `$ npm i` and then `$ npm test` will run the suite. [Istanbul](https://istanbul.js.org/) is used to ensure complete test coverage. You can run the tests and generate a coverage report with `$ npm run coverage`. Likewise, you can lint the code with `$ npm run lint`.
+
+# API
+## Classes
+
+<dl>
+<dt><a href="#Range">Range</a></dt>
+<dd><p>Class representing an iterable range of numbers.</p>
+</dd>
+</dl>
+
+## Functions
+
+<dl>
+<dt><a href="#range">range([start], stop, [step])</a> ⇒ <code><a href="#Range">Range</a></code></dt>
+<dd><p>Creates an instance of Range.</p>
+<p>All of the parameters may be negative or floating point. <code>stop</code> may be included singly.</p>
+</dd>
+</dl>
+
+## Typedefs
+
+<dl>
+<dt><a href="#iterCallback">iterCallback</a> : <code>function</code></dt>
+<dd></dd>
+<dt><a href="#reduceCallback">reduceCallback</a> : <code>function</code></dt>
+<dd></dd>
+</dl>
+
+<a name="Range"></a>
+
+## Range
+Class representing an iterable range of numbers.
+
+**Kind**: global class  
+
+* [Range](#Range)
+    * [.length](#Range+length) : <code>number</code>
+    * [.forEach(callback, [thisArg])](#Range+forEach)
+    * [.map(callback, [thisArg])](#Range+map) ⇒ <code>array</code>
+    * [.reduce(callback, [accumulator])](#Range+reduce) ⇒ <code>any</code>
+    * [.reduceRight(callback, [accumulator])](#Range+reduceRight) ⇒ <code>any</code>
+    * [.every(callback, [thisArg])](#Range+every) ⇒ <code>boolean</code>
+    * [.some(callback, [thisArg])](#Range+some) ⇒ <code>boolean</code>
+    * [.filter(callback, [thisArg])](#Range+filter) ⇒ <code>array</code>
+    * [.find(callback, [thisArg])](#Range+find) ⇒ <code>any</code>
+    * [.findIndex(callback, [thisArg])](#Range+findIndex) ⇒ <code>number</code>
+    * [.indexOf(searchElement, [fromIndex])](#Range+indexOf) ⇒ <code>number</code>
+    * [.lastIndexOf(searchElement, [fromIndex])](#Range+lastIndexOf) ⇒ <code>number</code>
+    * [.includes(searchElement, [fromIndex])](#Range+includes) ⇒ <code>boolean</code>
+    * [.reverse()](#Range+reverse) ⇒ [<code>Range</code>](#Range)
+
+<a name="Range+length"></a>
+
+### range.length : <code>number</code>
+The calculated length of the range.
+
+**Kind**: instance property of [<code>Range</code>](#Range)  
+**Read only**: true  
+<a name="Range+forEach"></a>
+
+### range.forEach(callback, [thisArg])
+Execute a callback for each element of the range.
+
+**Kind**: instance method of [<code>Range</code>](#Range)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| callback | [<code>iterCallback</code>](#iterCallback) |  | The function to call for each element. |
+| [thisArg] | <code>any</code> | <code>this</code> | The object that `this` will refer to inside the callback. |
+
+<a name="Range+map"></a>
+
+### range.map(callback, [thisArg]) ⇒ <code>array</code>
+Build an array with the return values of a function called for each element of the range.
+
+**Kind**: instance method of [<code>Range</code>](#Range)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| callback | [<code>iterCallback</code>](#iterCallback) |  | The function to call for each element. |
+| [thisArg] | <code>any</code> | <code>this</code> | The object that `this` will refer to inside the callback. |
+
+<a name="Range+reduce"></a>
+
+### range.reduce(callback, [accumulator]) ⇒ <code>any</code>
+Apply a function to an accumulator and each element in the range to reduce it to a single value.
+
+**Kind**: instance method of [<code>Range</code>](#Range)  
+**Throws**:
+
+- <code>TypeError</code> - If given an empty range and accumulator.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| callback | [<code>reduceCallback</code>](#reduceCallback) | The function to call for each element. |
+| [accumulator] | <code>any</code> | The initial value for the accumulator. If no accumulator is given, the first element in the array will be used. |
+
+<a name="Range+reduceRight"></a>
+
+### range.reduceRight(callback, [accumulator]) ⇒ <code>any</code>
+Apply a function to an accumulator and each element in the range in reverse order to reduce it to a single value.
+
+**Kind**: instance method of [<code>Range</code>](#Range)  
+**Throws**:
+
+- <code>TypeError</code> - If given an empty range and accumulator.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| callback | [<code>reduceCallback</code>](#reduceCallback) | The function to call for each element. |
+| [accumulator] | <code>any</code> | The initial value for the accumulator. If no accumulator is given, the last element in the array will be used. |
+
+<a name="Range+every"></a>
+
+### range.every(callback, [thisArg]) ⇒ <code>boolean</code>
+Apply a function to an each element in the range, returning true if every function call does.
+
+**Kind**: instance method of [<code>Range</code>](#Range)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| callback | [<code>iterCallback</code>](#iterCallback) |  | The function to call for each element. |
+| [thisArg] | <code>any</code> | <code>this</code> | The object that `this` will refer to inside the callback. |
+
+<a name="Range+some"></a>
+
+### range.some(callback, [thisArg]) ⇒ <code>boolean</code>
+Apply a function to an each element in the range, returning true if at least one function call does.
+
+**Kind**: instance method of [<code>Range</code>](#Range)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| callback | [<code>iterCallback</code>](#iterCallback) |  | The function to call for each element. |
+| [thisArg] | <code>any</code> | <code>this</code> | The object that `this` will refer to inside the callback. |
+
+<a name="Range+filter"></a>
+
+### range.filter(callback, [thisArg]) ⇒ <code>array</code>
+Apply a function to an each element in the range, returning an array populated with the elements for which the function call returns true.
+
+**Kind**: instance method of [<code>Range</code>](#Range)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| callback | [<code>iterCallback</code>](#iterCallback) |  | The function to call for each element. |
+| [thisArg] | <code>any</code> | <code>this</code> | The object that `this` will refer to inside the callback. |
+
+<a name="Range+find"></a>
+
+### range.find(callback, [thisArg]) ⇒ <code>any</code>
+Apply a function to an each element in the range, returning the first element for which the function call returns true.
+
+**Kind**: instance method of [<code>Range</code>](#Range)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| callback | [<code>iterCallback</code>](#iterCallback) |  | The function to call for each element. |
+| [thisArg] | <code>any</code> | <code>this</code> | The object that `this` will refer to inside the callback. |
+
+<a name="Range+findIndex"></a>
+
+### range.findIndex(callback, [thisArg]) ⇒ <code>number</code>
+Apply a function to an each element in the range, returning the index of first element for which the function call returns true.
+
+**Kind**: instance method of [<code>Range</code>](#Range)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| callback | [<code>iterCallback</code>](#iterCallback) |  | The function to call for each element. |
+| [thisArg] | <code>any</code> | <code>this</code> | The object that `this` will refer to inside the callback. |
+
+<a name="Range+indexOf"></a>
+
+### range.indexOf(searchElement, [fromIndex]) ⇒ <code>number</code>
+Iterate over the range returning the index of the first instance of the given element or -1.
+
+**Kind**: instance method of [<code>Range</code>](#Range)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| searchElement | <code>number</code> |  | The number to search for. |
+| [fromIndex] | <code>number</code> | <code>0</code> | The index to start from. Negative indexes are treated as indexes from the right side of the range. |
+
+<a name="Range+lastIndexOf"></a>
+
+### range.lastIndexOf(searchElement, [fromIndex]) ⇒ <code>number</code>
+Iterate over the range returning the index of the last instance of the given element or -1.
+
+**Kind**: instance method of [<code>Range</code>](#Range)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| searchElement | <code>number</code> |  | The number to search for. |
+| [fromIndex] | <code>number</code> | <code>0</code> | The index to start from. Negative indexes are treated as indexes from the right side of the range. |
+
+<a name="Range+includes"></a>
+
+### range.includes(searchElement, [fromIndex]) ⇒ <code>boolean</code>
+Iterate over the range returning true if it contains the given element or -1.
+
+**Kind**: instance method of [<code>Range</code>](#Range)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| searchElement | <code>number</code> |  | The number to search for. |
+| [fromIndex] | <code>number</code> | <code>0</code> | The index to start from. Negative indexes are treated as indexes from the right side of the range. |
+
+<a name="Range+reverse"></a>
+
+### range.reverse() ⇒ [<code>Range</code>](#Range)
+Returns a new instance of Range that will produce the range in reversed order.
+
+**Kind**: instance method of [<code>Range</code>](#Range)  
+<a name="range"></a>
+
+## range([start], stop, [step]) ⇒ [<code>Range</code>](#Range)
+Creates an instance of Range.
+
+All of the parameters may be negative or floating point. `stop` may be included singly.
+
+**Kind**: global function  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [start] | <code>number</code> | <code>0</code> | The start of the range. Included. |
+| stop | <code>number</code> |  | The end of the range. Excluded. |
+| [step] | <code>number</code> | <code>1</code> | The interval to increment by. |
+
+<a name="iterCallback"></a>
+
+## iterCallback : <code>function</code>
+**Kind**: global typedef  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| currentValue | <code>number</code> | The current element of the range. |
+| index | <code>number</code> | The index of the current element. |
+| range | [<code>Range</code>](#Range) | The current Range element. |
+
+<a name="reduceCallback"></a>
+
+## reduceCallback : <code>function</code>
+**Kind**: global typedef  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| accumulator | <code>any</code> | The accumulated results of the reduction. |
+| currentValue | <code>number</code> | The current element of the range. |
+| index | <code>number</code> | The index of the current element. |
+| range | [<code>Range</code>](#Range) | The current Range element. |
+
