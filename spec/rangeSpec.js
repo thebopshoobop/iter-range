@@ -21,6 +21,14 @@ describe("The range function", () => {
       expect(r.map(i => i ** 2)).toEqual([0, 1, 4, 9, 16, 25, 36, 49, 64, 81]);
     });
 
+    it("should be recursively consumable when iterating", () => {
+      const r = range(4);
+
+      for (let _ of r) {
+        expect([...r]).toEqual([0, 1, 2, 3]);
+      }
+    });
+
     it("should treat a single parameter as a max and start from 0", () => {
       expect([...range(8)]).toEqual([0, 1, 2, 3, 4, 5, 6, 7]);
     });
@@ -116,6 +124,12 @@ describe("The range function", () => {
 
       it("should return a mapped array", () => {
         expect(range(5).map(i => i ** 2)).toEqual([0, 1, 4, 9, 16]);
+      });
+
+      it("should be recursively consumable", () => {
+        range(4).forEach((current, index, range) => {
+          expect([...range]).toEqual([0, 1, 2, 3]);
+        });
       });
     });
 
