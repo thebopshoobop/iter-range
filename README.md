@@ -16,18 +16,16 @@ range(4).forEach(() => console.log("#winning"));
 
 ## Introduction
 
-This is just one sweet little range library. It implements the same basic API as the [python `range` function](https://docs.python.org/3/library/stdtypes.html?highlight=range#range): `range([start = 0], stop, [step = 1])`. Note that in order to include a step parameter, you must specify a start. The parameters can all be negative, and floating-point numbers work too! If you provide paramaters that describe an impossible or empty range, you will recieve an empty iterator.
+This is just one sweet little range library. It implements the same basic API as the [python `range` function](https://docs.python.org/3/library/stdtypes.html?highlight=range#range): `range([start = 0], stop, [step = 1])`. Note that in order to include a step parameter, you must specify a start. The parameters can all be negative, and floating-point numbers work too! If you provide paramaters that describe an impossible or empty range, you will recieve an object that iterates 0 times.
 
-This library exports a singe function. The `range` factory function produces instances of the core `Range` object. `Range` objects are iterable and have lazily evaluated versions of many `Array.prototype` methods including `forEach`, `map`, and `reduce` methods, along with a (constant time) `length` property.
-
-The key differentiator between this library and the other JavaScript range libraries that I have seen is that it does not create and populate arrays (other than `map`). Instead, I provide you with factory functions that build iterator objects. These objects include implementations of several `Array.prototype` methods that match their Array counterparts nearly exactly. If you really want an array, you can always use `Array.from(range(2, 12))` or spread the iterator `[...range(5)]`. Note that (with the exception of `map`, `reduce`, `reduceRight`, and `filter`), these are all constant-space methods. They use the iterator backend and don't create any additional arrays or objects. Furthermore, they are written to break early if possible, so a `some` call that matches on the first item stops there and returns.
+The key differentiator between this library and the other JavaScript range libraries that I have seen is that it does not create and populate arrays (other than `map`). Instead, I provide you a factory function that builds iterable objects. These objects also include lazily-evaluated implementations of many `Array.prototype` methods that match their Array counterparts nearly exactly. If you really want an array, you can always use `Array.from(range(2, 12))` or the spread operator `[...range(5)]`. Note that (with the exception of `map`, `reduce`, `reduceRight`, and `filter`), these are all constant-space methods. They take advantage of the object's iterable nature and don't create any additional arrays or objects. Furthermore, they are written to break early if possible, so a `some` call that matches on the first item stops there and returns.
 
 ## Range
 
 The `Range` object contains the core features of this library. You can create one by calling the `range` function. `Range` objects are iterable and have a length:
 
 ```js
-const { range } = require("iter-range");
+const range = require("iter-range");
 
 for (let i of range(5)) {
   console.log(i); // logs 0, then 1, then 2, etc.
@@ -62,7 +60,7 @@ Additionally, `Range` objects have a whole possee of the standard `Array.prototy
 * `reverse()`
 
 ```js
-const { range } = require("iter-range");
+const range = require("iter-range");
 console.log(range(3).map(i => i ** 3)); //=> [0, 8, 27]
 console.log(range(3, 6).map((i, index) => [i, index])); //=> [[3, 0], [4, 1], [5, 2]]
 console.log(...range(5).reverse()); //=> 4 3 2 1 0
@@ -70,7 +68,7 @@ console.log(range(8).filter(i => i % 2 === 0)); //=> [0, 2, 4, 6]
 console.log(range(2.5, -2.75, -0.25).includes(1)); //=> true
 ```
 
-These methods are all written to consume the iterator rather than creating an array to iterate over (`map`, of course, builds an array to return). If you need a refresher, you should check the [MDN Array documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). The important bit is that the callbacks (except for `reduce` and `reduceRight`, which get the accumulator first) will be called with three parameters: `currentValue`, `index`, and `Range`. The only difference is the third one. Since these methods don't construct an array to iterate over, there is no array to pass. Instead they pass the `Range` object as the third parameter. I hope that's helpful.
+If you need a refresher, on the APIs you should check the [MDN Array documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). I have strived to match it precisely. The important bit is that the callbacks (except for `reduce` and `reduceRight`, which get the accumulator first) will be called with three parameters: `currentValue`, `index`, and `Range`. The only difference is the third one. Since these methods don't construct an array to iterate over, there is no array to pass. Instead they pass the `Range` object as the third parameter. I hope that's helpful.
 
 Also note that negative values _are_ supported for `fromIndex`; they are treated as indexes from the _right_ side of the range). One other difference is that reverse does _not_ mutate the `Range` it is called on, but instead just returns a new instance.
 
