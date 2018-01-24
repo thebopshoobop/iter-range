@@ -77,31 +77,6 @@ Also note that negative values _are_ supported for `fromIndex`; they are treated
 The `Range` object methods are thoroughly tested to match their Array.prototype counterparts (except as noted). Please let me know if I've missed or wrongly implemented anything. You can run the tests by cloning the repository, and running [Jasmine](https://jasmine.github.io/). If you don't have it installed globally, you can simply `$ npm i` and then `$ npm test` will run the suite. [Istanbul](https://istanbul.js.org/) is used to ensure complete test coverage. You can run the tests and generate a coverage report with `$ npm run coverage`. Likewise, you can lint the code with `$ npm run lint`.
 
 # API
-## Classes
-
-<dl>
-<dt><a href="#Range">Range</a></dt>
-<dd><p>Class representing an iterable range of numbers.</p>
-</dd>
-</dl>
-
-## Functions
-
-<dl>
-<dt><a href="#range">range([start], stop, [step])</a> ⇒ <code><a href="#Range">Range</a></code></dt>
-<dd><p>Creates an instance of Range.</p>
-<p>All of the parameters may be negative or floating point. <code>stop</code> may be included singly.</p>
-</dd>
-</dl>
-
-## Typedefs
-
-<dl>
-<dt><a href="#iterCallback">iterCallback</a> : <code>function</code></dt>
-<dd></dd>
-<dt><a href="#reduceCallback">reduceCallback</a> : <code>function</code></dt>
-<dd></dd>
-</dl>
 
 <a name="Range"></a>
 
