@@ -17,7 +17,7 @@ range(4).forEach(() => console.log("#winning"));
 
 ## Introduction
 
-This is just one sweet little range library. It implements the same basic API as the [python `range` function](https://docs.python.org/3/library/stdtypes.html?highlight=range#range): `range([start = 0], stop, [step = 1])`. Note that in order to include a step parameter, you must specify a start and in order to create a decreasing range, you must specify a negative step. The parameters can all be negative, and floating-point numbers work too! If you provide paramaters that describe an impossible or empty range, you will recieve an object that iterates 0 times.
+This is just a sweet little range library. It implements the same basic API as the [python `range` function](https://docs.python.org/3/library/stdtypes.html?highlight=range#range): `range([start = 0], stop, [step = 1])`. Note that in order to include a step parameter, you must specify a start and in order to create a decreasing range, you must specify a negative step. The parameters can all be negative, and floating-point numbers work too! If you provide paramaters that describe an impossible or empty range, you will recieve an object that iterates 0 times.
 
 The key differentiator between this library and the other JavaScript range libraries that I have seen is that it does not create and populate arrays (other than `map`). Instead, I provide you a factory function that builds iterable `Range` objects.
 
@@ -59,7 +59,7 @@ console.log(range(2.5, -2.75, -0.25).includes(1)); //=> true
 console.log(range(10, 0, -1).indexOf(3)); //=> 7
 ```
 
-I have strived to match [the Array API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) precisely for these methods. For details, refer to the API documentation below.
+I have strived to match the [Array API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) precisely for these methods. For details, refer to the `Range` API documentation below.
 
 ### Exceptions
 
@@ -67,9 +67,14 @@ I have strived to match [the Array API](https://developer.mozilla.org/en-US/docs
 
 * Reverse does _not_ mutate the `Range` it is called on, it just returns a new instance.
 
-## Testing
+## Development
 
-The `Range` object methods are thoroughly tested to match their Array.prototype counterparts (except as noted). Please let me know if I've missed or wrongly implemented anything. You can run the tests by cloning the repository, and running [Jasmine](https://jasmine.github.io/). If you don't have it installed globally, you can simply install the dependencies with `$ npm i` and then run the suite with `$ npm test`. [Istanbul](https://istanbul.js.org/) is used to ensure complete test coverage. You can run the tests and generate a coverage report with `$ npm run coverage`. Likewise, you can lint the code with `$ npm run lint`.
+The `Range` object methods are thoroughly tested to match their `Array.prototype` counterparts (except as noted). Please let me know if I've missed or wrongly implemented anything. [Jasmine](https://jasmine.github.io/) is used for tests, [Istanbul](https://istanbul.js.org/) is used to ensure complete test coverage, [ESLint](https://eslint.org/) is used for linting, and [jsdoc-to-markown](https://github.com/jsdoc2md/jsdoc-to-markdown) is used to generate the documentation. You can prepare the dev environment by cloning the repository and installing the dependencies (`$ npm i`).
+
+* Tests: `$ npm test`
+* Coverage: `$ npm coverage`
+* Linting: `$ npm run lint`
+* Documentation: `$ npm run doc`
 
 # API
 
