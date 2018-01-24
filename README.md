@@ -1,8 +1,13 @@
 # Iterable `range`
 
+[![npm version](https://badge.fury.io/js/iter-range.svg)](https://badge.fury.io/js/iter-range)
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/)
+[![ISC License](https://goo.gl/RvzTyG)](https://opensource.org/licenses/ISC)
 [![build status](https://travis-ci.org/thebopshoobop/iter-range.svg?branch=master)](https://travis-ci.org/thebopshoobop/iter-range)
 [![code coverage](https://img.shields.io/codecov/c/github/thebopshoobop/iter-range.svg?maxAge=2592000)](https://codecov.io/gh/thebopshoobop/iter-range)
 [![documentation](https://inch-ci.org/github/thebopshoobop/iter-range.svg?branch=master&style=flat)](https://inch-ci.org/github/thebopshoobop/iter-range)
+[![dev dependencies](https://david-dm.org/thebopshoobop/iter-range/dev-dependencies.svg)](https://david-dm.org/thebopshoobop/iter-range?type=dev)
+[![Code Climate](https://codeclimate.com/github/thebopshoobop/iter-range.svg)](https://codeclimate.com/github/thebopshoobop/iter-range)
 
 ## Quickstart
 
