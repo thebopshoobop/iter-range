@@ -46,20 +46,6 @@ console.log(range(0, 10, 3).length); //=> 4
 
 Additionally, `Range` objects have a whole possee of the standard `Array.prototype` methods:
 
-* `forEach(callback, [thisArg])`
-* `map(callback, [thisArg])`
-* `reduce(callback, [accumulator])`
-* `reduceRight(callback, [accumulator])`
-* `every(callback, [thisArg])`
-* `some(callback, [thisArg])`
-* `includes(callback, [thisArg])`
-* `filter(callback, [thisArg])`
-* `find(callback, [thisArg])`
-* `findIndex(callback, [thisArg])`
-* `indexOf(searchElement, [fromIndex])`
-* `lastIndexOf(searchElement, [fromIndex])`
-* `reverse()`
-
 ```js
 const range = require("iter-range");
 console.log(range(3).map(i => i ** 3)); //=> [0, 8, 27]
@@ -69,7 +55,7 @@ console.log(range(8).filter(i => i % 2 === 0)); //=> [0, 2, 4, 6]
 console.log(range(2.5, -2.75, -0.25).includes(1)); //=> true
 ```
 
-If you need a refresher, on the APIs you should check the [MDN Array documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). I have strived to match it precisely. The important bit is that the callbacks (except for `reduce` and `reduceRight`, which get the accumulator first) will be called with three parameters: `currentValue`, `index`, and `Range`. The only difference is the third one. Since these methods don't construct an array to iterate over, there is no array to pass. Instead they pass the `Range` object as the third parameter. I hope that's helpful.
+I have strived to match [the Array API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) precisely for these methods. The important bit is that the callbacks (except for `reduce` and `reduceRight`, which get the accumulator first) will be called with three parameters: `currentValue`, `index`, and `Range`. The only difference is the third one. Since these methods don't construct an array to iterate over, there is no array to pass. Instead they pass the `Range` object as the third parameter. I hope that's helpful.
 
 Also note that negative values _are_ supported for `fromIndex`; they are treated as indexes from the _right_ side of the range). One other difference is that reverse does _not_ mutate the `Range` it is called on, but instead just returns a new instance.
 
