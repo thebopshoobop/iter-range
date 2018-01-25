@@ -86,7 +86,7 @@ describe("The range function", () => {
     });
   });
 
-  describe("when accesssing it's iteration methods,", () => {
+  describe("when accesssing it's methods,", () => {
     let callback;
     let spy;
     beforeEach(() => {
@@ -635,6 +635,37 @@ describe("The range function", () => {
             expect(callback).toHaveBeenCalledWith("caught");
           }
         });
+      });
+    });
+
+    describe("when using the get method,", () => {
+      it("should return the element at the given index", () => {
+        expect(range(5).get(3)).toEqual(3);
+        expect(range(22, 21, -0.1).get(2)).toEqual(21.8);
+      });
+
+      it("should handle negative indexes", () => {
+        expect(range(10).get(-2)).toEqual(8);
+        expect(range(20, 10, -1).get(9)).toEqual(11);
+      });
+
+      it("should throw a RangeError for out of range indexes", () => {
+        try {
+          range(12).get(22);
+        } catch (error) {
+          expect(error.name).toEqual("RangeError");
+          callback("positive");
+        } finally {
+          expect(callback).toHaveBeenCalledWith("positive");
+        }
+        try {
+          range(22, 11, -3).get(-15);
+        } catch (error) {
+          expect(error.name).toEqual("RangeError");
+          callback("negative");
+        } finally {
+          expect(callback).toHaveBeenCalledWith("negative");
+        }
       });
     });
   });

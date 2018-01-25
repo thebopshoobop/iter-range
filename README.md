@@ -27,7 +27,7 @@ This is just a sweet little range library. It implements the same basic API as t
 
 The key differentiator between this library and the other JavaScript range libraries that I have seen is that it does not create and populate arrays (other than `map`). Instead, I provide you a factory function that builds iterable `Range` objects.
 
-`Range` objects also include lazily-evaluated implementations of many `Array.prototype` methods that match their Array counterparts nearly exactly. If you really want an array, you can always use `Array.from(range(2, 12))` or the spread operator `[...range(5)]`. Note that (with the exception of `map`, `reduce`, `reduceRight`, and `filter`), these are all constant-space methods. They take advantage of the object's iterable nature and don't create any additional arrays or objects. Furthermore, they are written to break early if possible, so a `some` call that matches on the first item stops there and returns.
+`Range` objects also include lazily-evaluated implementations of many `Array.prototype` methods that match their Array counterparts nearly exactly. If you really want an array, you can always use `Array.from(range(2, 12))` or the spread operator `[...range(5)]`. Note that (with the exception of `map`, `reduce`, `reduceRight`, and `filter`), these are all constant-space methods. They take advantage of the object's iterable nature and don't create any additional arrays or objects. Furthermore, they are written to break early if possible, so a `some` call that matches on the first item stops there and returns. Finally, you can find a value at a given index in a `Range` with the `get` method.
 
 ## Range
 
@@ -54,7 +54,7 @@ console.log(range(5).length); //=> 5
 console.log(range(0, 10, 3).length); //=> 4
 ```
 
-Additionally, `Range` objects have a whole posse of the standard `Array.prototype` methods:
+Additionally, `Range` objects have a whole posse of the standard `Array.prototype` methods (and `get`):
 
 ```js
 const range = require("iter-range");
@@ -63,6 +63,7 @@ console.log(...range(5).reverse()); //=> 4 3 2 1 0
 console.log(range(8).filter(i => i % 2 === 0)); //=> [0, 2, 4, 6]
 console.log(range(2.5, -2.75, -0.25).includes(1)); //=> true
 console.log(range(10, 0, -1).indexOf(3)); //=> 7
+console.log(range(2.5, 15, 1.25).get(2)); //=> 5
 ```
 
 I have strived to match the [Array API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) precisely for these methods. For details, refer to the `Range` API documentation below.
@@ -106,6 +107,7 @@ Class representing an iterable range of numbers.
     * [.lastIndexOf(searchElement, [fromIndex])](#Range+lastIndexOf) ⇒ <code>number</code>
     * [.includes(searchElement, [fromIndex])](#Range+includes) ⇒ <code>boolean</code>
     * [.reverse()](#Range+reverse) ⇒ [<code>Range</code>](#Range)
+    * [.get(index)](#Range+get) ⇒ <code>number</code>
 
 <a name="Range+length"></a>
 
@@ -233,7 +235,7 @@ Apply a function to an each element in the range, returning the index of first e
 <a name="Range+indexOf"></a>
 
 ### range.indexOf(searchElement, [fromIndex]) ⇒ <code>number</code>
-Iterate over the range returning the index of the first instance of the given element or -1.
+Return the index of the first instance of the given element or -1.
 
 **Kind**: instance method of [<code>Range</code>](#Range)  
 
@@ -245,7 +247,7 @@ Iterate over the range returning the index of the first instance of the given el
 <a name="Range+lastIndexOf"></a>
 
 ### range.lastIndexOf(searchElement, [fromIndex]) ⇒ <code>number</code>
-Iterate over the range returning the index of the last instance of the given element or -1.
+Return the index of the last instance of the given element or -1.
 
 **Kind**: instance method of [<code>Range</code>](#Range)  
 
@@ -257,7 +259,7 @@ Iterate over the range returning the index of the last instance of the given ele
 <a name="Range+includes"></a>
 
 ### range.includes(searchElement, [fromIndex]) ⇒ <code>boolean</code>
-Iterate over the range returning true if it contains the given element or -1.
+Return true if the Range contains the given element or -1.
 
 **Kind**: instance method of [<code>Range</code>](#Range)  
 
@@ -272,10 +274,25 @@ Iterate over the range returning true if it contains the given element or -1.
 Returns a new instance of Range that will produce the range in reversed order.
 
 **Kind**: instance method of [<code>Range</code>](#Range)  
+<a name="Range+get"></a>
+
+### range.get(index) ⇒ <code>number</code>
+Return the value at a given index or undefined.
+
+**Kind**: instance method of [<code>Range</code>](#Range)  
+**Throws**:
+
+- <code>TypeError</code> - If the index is out of bounds.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| index | <code>number</code> | The index to query. |
+
 <a name="range"></a>
 
 ## range([start], stop, [step]) ⇒ [<code>Range</code>](#Range)
-Creates an instance of Range.
+Creates a Range instance.
 
 All of the parameters may be negative or floating point. `stop` may be included singly.
 
