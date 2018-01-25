@@ -564,7 +564,7 @@ describe("The range function", () => {
       });
 
       it("should accpet a fromIndex parameter to reverse search from", () => {
-        expect(range(5, 10).lastIndexOf(6, 4)).toEqual(1);
+        expect(range(5, 10).lastIndexOf(6, 3)).toEqual(1);
         expect(range(5, 10).lastIndexOf(9, 3)).toEqual(-1);
       });
 
