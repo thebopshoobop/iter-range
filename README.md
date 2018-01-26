@@ -33,7 +33,7 @@ This is just a sweet little range library. It implements the same basic API as t
 
 `Range` objects also include lazily-evaluated implementations of many `Array.prototype` methods that match their Array counterparts nearly exactly. If you really want an array, you can always use `Array.from(range(2, 12))` or the spread operator `[...range(5)]`. There is also a `get` method, which will return the value at a given index.
 
-Note that (with the exception of `map`, `reduce`, `reduceRight`, and `filter`), these are all constant-space methods. They take advantage of the object's iterable nature and don't create any additional arrays or objects. Furthermore, those that accept a callback are written to break early if possible; a `some` call that matches on the first item stops there and returns. Likewise, `indexOf`, `lasIndexOf`, `includes`, and `get` are all constant-time operations.
+Note that (with the exception of `map`, `reduce`, `reduceRight`, and `filter`), these are all constant-space methods. They take advantage of the object's iterable nature and don't create any additional arrays or objects. Furthermore, those that accept a callback are written to break early if possible; a `some` call that matches on the first item stops there and returns. Likewise, `indexOf`, `lastIndexOf`, `includes`, and `get` are all constant-time operations.
 
 ## Range
 
@@ -283,7 +283,7 @@ Returns a new instance of Range that will produce the range in reversed order.
 <a name="Range+get"></a>
 
 ### range.get(index) ⇒ <code>number</code>
-Return the value at a given index or undefined.
+Return the value at a given index.
 
 **Kind**: instance method of [<code>Range</code>](#Range)  
 **Throws**:
@@ -293,7 +293,7 @@ Return the value at a given index or undefined.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| index | <code>number</code> | The index to query. |
+| index | <code>number</code> | The index to query. Negative indexes will be treated as indexes from the end of the range. |
 
 <a name="range"></a>
 
