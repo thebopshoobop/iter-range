@@ -1,6 +1,6 @@
 {
   "name": "iter-range",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "An iterator-based range library with superpowers (useful methods).",
   "keywords": [
     "range",
