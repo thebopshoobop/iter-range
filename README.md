@@ -13,21 +13,27 @@
 ## Quickstart
 
 ```bash
-$ npm i iter-range
+npm i iter-range
 ```
 
 ```js
 const range = require("iter-range");
+
+for (let i of range(10, 0, -1)) {
+  console.log(i);
+}
+console.log("Midnight!");
+
 range(4).forEach(() => console.log("#winning"));
 ```
 
 ## Introduction
 
-This is just a sweet little range library. It implements the same basic API as the [python `range` function](https://docs.python.org/3/library/stdtypes.html?highlight=range#range): `range([start = 0], stop, [step = 1])`. Note that in order to include a step parameter, you must specify a start and in order to create a decreasing range, you must specify a negative step. The parameters can all be negative, and floating-point numbers work too! If you provide paramaters that describe an impossible or empty range, you will recieve an object that iterates 0 times.
+This is just a sweet little range library. It implements the same basic API as the [python `range` function](https://docs.python.org/3/library/stdtypes.html?highlight=range#range): `range([start = 0], stop, [step = 1])`. The key differentiator between this library and the other JavaScript range libraries that I have seen is that it does not create and populate arrays with the given parameters. Instead, I provide you a factory function that builds iterable `Range` objects.
 
-The key differentiator between this library and the other JavaScript range libraries that I have seen is that it does not create and populate arrays (other than `map`). Instead, I provide you a factory function that builds iterable `Range` objects.
+`Range` objects also include lazily-evaluated implementations of many `Array.prototype` methods that match their Array counterparts nearly exactly. If you really want an array, you can always use `Array.from(range(2, 12))` or the spread operator `[...range(5)]`. There is also a `get` method, which will return the value at a given index.
 
-`Range` objects also include lazily-evaluated implementations of many `Array.prototype` methods that match their Array counterparts nearly exactly. If you really want an array, you can always use `Array.from(range(2, 12))` or the spread operator `[...range(5)]`. Note that (with the exception of `map`, `reduce`, `reduceRight`, and `filter`), these are all constant-space methods. They take advantage of the object's iterable nature and don't create any additional arrays or objects. Furthermore, they are written to break early if possible, so a `some` call that matches on the first item stops there and returns. Finally, you can find a value at a given index in a `Range` with the `get` method.
+Note that (with the exception of `map`, `reduce`, `reduceRight`, and `filter`), these are all constant-space methods. They take advantage of the object's iterable nature and don't create any additional arrays or objects. Furthermore, those that accept a callback are written to break early if possible; a `some` call that matches on the first item stops there and returns. Likewise, `indexOf`, `lasIndexOf`, `includes`, and `get` are all constant-time operations.
 
 ## Range
 
@@ -49,7 +55,7 @@ console.log(...r); //=> 0 1 2
 console.log(Array.from(r)); //=> [0, 1, 2]
 console.log(...r); //=> 0 1 2
 
-// Their length is a property
+// They have a length property
 console.log(range(5).length); //=> 5
 console.log(range(0, 10, 3).length); //=> 4
 ```
@@ -70,18 +76,18 @@ I have strived to match the [Array API](https://developer.mozilla.org/en-US/docs
 
 ### Exceptions
 
-* Since these methods don't construct an array to iterate over, there is no array to pass to the callbacks that would normally recieve them. Instead they pass the `Range` object as the third parameter. I hope that's helpful.
+* Since these methods don't construct an array to iterate over, there is no array to pass to the callbacks that would normally receive them. Instead they pass the `Range` object as the third parameter. I hope that's helpful.
 
 * Reverse does _not_ mutate the `Range` it is called on, it just returns a new instance.
 
 ## Development
 
-The `Range` object methods are thoroughly tested to match their `Array.prototype` counterparts (except as noted). Please let me know if I've missed or wrongly implemented anything. [Jasmine](https://jasmine.github.io/) is used for tests, [Istanbul](https://istanbul.js.org/) is used to ensure complete test coverage, [ESLint](https://eslint.org/) is used for linting, and [jsdoc-to-markown](https://github.com/jsdoc2md/jsdoc-to-markdown) is used to generate the documentation. You can prepare the dev environment by cloning the repository and installing the dependencies (`$ npm i`).
+The `Range` object methods are thoroughly tested to match their `Array.prototype` counterparts (except as noted). Please let me know if I've missed or wrongly implemented anything. [Jasmine](https://jasmine.github.io/) is used for tests, [Istanbul](https://istanbul.js.org/) is used to ensure complete test coverage, [ESLint](https://eslint.org/) is used for linting, and [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown) is used to generate the documentation. You can prepare the dev environment by cloning the repository and installing the dependencies (`$ npm i`).
 
-* Tests: `$ npm test`
-* Coverage: `$ npm coverage`
-* Linting: `$ npm run lint`
-* Documentation: `$ npm run doc`
+* Tests: `npm test`
+* Coverage: `npm coverage`
+* Linting: `npm run lint`
+* Documentation: `npm run doc`
 
 # API
 
@@ -294,7 +300,7 @@ Return the value at a given index or undefined.
 ## range([start], stop, [step]) ⇒ [<code>Range</code>](#Range)
 Creates a Range instance.
 
-All of the parameters may be negative or floating point. `stop` may be included singly.
+All of the parameters may be negative or floating point. If you only pass a single parameter, it will be used as `stop`. In order to pass a `step`, you must pass all three. In order to create a decreasing `Range`, you must pass a negative `step`. If you provide parameters that describe an impossible or empty range, you will receive an object that iterates 0 times.
 
 **Kind**: global function  
 
