@@ -1,17 +1,22 @@
 {
   "name": "iter-range",
-  "version": "0.5.1",
-  "description":
-    "An iterator-based range library with superpowers (useful methods).",
-  "keywords": ["range", "iterator", "lazy", "iteration", "array", "interval"],
+  "version": "0.5.2",
+  "description": "An iterator-based range library with superpowers (useful methods).",
+  "keywords": [
+    "range",
+    "iterator",
+    "lazy",
+    "iteration",
+    "array",
+    "interval"
+  ],
   "main": "lib/range.js",
   "scripts": {
     "doc": "npx jsdoc2md lib/range.js --template .README.md > README.md",
     "lint": "npx eslint lib",
     "test": "npx jasmine",
     "coverage": "npx nyc npx jasmine",
-    "report-coverage":
-      "npx nyc --reporter=lcov npx jasmine > coverage.lcov && npx codecov"
+    "report-coverage": "npx nyc --reporter=lcov npx jasmine > coverage.lcov && npx codecov"
   },
   "repository": {
     "type": "git",
@@ -38,6 +43,8 @@
     "nyc": "^11.4.1"
   },
   "nyc": {
-    "exclude": ["spec"]
+    "exclude": [
+      "spec"
+    ]
   }
 }
