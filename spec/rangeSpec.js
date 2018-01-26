@@ -497,11 +497,9 @@ describe("The range function", () => {
         expect(range(10).indexOf(3, -3)).toEqual(-1);
       });
 
-      it("should reset the iterator if an index is found", () => {
-        const r = range(6);
-
-        expect(r.indexOf(3)).toEqual(3);
-        expect(r.indexOf(3)).toEqual(3);
+      it("should return -1 for too-large fromIndex values", () => {
+        expect(range(5).indexOf(2, 10)).toEqual(-1);
+        expect(range(0, -10, -2).indexOf(-6, 6)).toEqual(-1);
       });
     });
 
@@ -526,11 +524,14 @@ describe("The range function", () => {
         expect(range(10).includes(3, -3)).toEqual(false);
       });
 
-      it("should reset the iterator if there is an includes match", () => {
-        const r = range(10, 20);
+      it("should return false for too-large fromIndex values", () => {
+        expect(range(10).includes(3, 12)).toEqual(false);
+        expect(range(-10, -100, -5).includes(-50, 50)).toBe(false);
+      });
 
-        expect(r.includes(13)).toEqual(true);
-        expect(r.includes(13)).toEqual(true);
+      it("should properly-handle too-small fromIndex values", () => {
+        expect(range(10).includes(3, -100)).toEqual(true);
+        expect(range(10, 20).includes(15, -11)).toEqual(true);
       });
     });
 
@@ -576,13 +577,6 @@ describe("The range function", () => {
         expect(range(5, 10).lastIndexOf(6, -2)).toEqual(1);
         expect(range(5, 10).lastIndexOf(9, -3)).toEqual(-1);
         expect(range(10).lastIndexOf(4, -12)).toEqual(-1);
-      });
-
-      it("should reset the iterator when finding the last index", () => {
-        const r = range(10);
-
-        expect(r.lastIndexOf(3)).toEqual(3);
-        expect(r.lastIndexOf(3)).toEqual(3);
       });
     });
 

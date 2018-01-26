@@ -242,7 +242,7 @@ Return the index of the first instance of the given element or -1.
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | searchElement | <code>number</code> |  | The number to search for. |
-| [fromIndex] | <code>number</code> | <code>0</code> | The index to start from. Negative indexes are treated as indexes from the right side of the range. |
+| [fromIndex] | <code>number</code> | <code>0</code> | The smallest acceptable index. If the value is greater than the length of the range, -1 will be returned. Negative indexes are treated as indexes from the right side of the range. If the calculated index is less than 0, the whole range will be considered. |
 
 <a name="Range+lastIndexOf"></a>
 
@@ -254,7 +254,7 @@ Return the index of the last instance of the given element or -1.
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | searchElement | <code>number</code> |  | The number to search for. |
-| [fromIndex] | <code>number</code> | <code>0</code> | The index to start from. Negative indexes are treated as indexes from the right side of the range. |
+| [fromIndex] | <code>number</code> | <code>0</code> | The largest acceptable index. If the value is greater than the length of the range, the whole range will be considered. Negative indexes are treated as indexes from the right side of the range. If the calculated index is less than 0, -1 will be returned. |
 
 <a name="Range+includes"></a>
 
@@ -266,7 +266,7 @@ Return true if the Range contains the given element or -1.
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | searchElement | <code>number</code> |  | The number to search for. |
-| [fromIndex] | <code>number</code> | <code>0</code> | The index to start from. Negative indexes are treated as indexes from the right side of the range. |
+| [fromIndex] | <code>number</code> | <code>0</code> | The smallest acceptable index. If the value is greater than the length of the range, false will be returned. Negative indexes are treated as indexes from the right side of the range. If the calculated index is less than 0, the entire range will be considered. |
 
 <a name="Range+reverse"></a>
 
