@@ -91,10 +91,26 @@ The `Range` object methods are thoroughly tested to match their `Array.prototype
 
 # API
 
+<a name="range"></a>
+
+## range([start], stop, [step]) ⇒ [<code>Range</code>](#Range)
+Creates a Range instance. Exported.
+
+All of the parameters may be negative or floating point. If you only pass a single parameter, it will be used as `stop`. In order to pass a `step`, you must pass all three. In order to create a decreasing `Range`, you must pass a negative `step`. If you provide parameters that describe an impossible or empty range, you will receive an object that iterates 0 times.
+
+**Kind**: global function  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [start] | <code>number</code> | <code>0</code> | The start of the range. Included. |
+| stop | <code>number</code> |  | The end of the range. Excluded. |
+| [step] | <code>number</code> | <code>1</code> | The interval to increment by. |
+
+
 <a name="Range"></a>
 
 ## Range
-Class representing an iterable range of numbers.
+Class representing an iterable range of numbers. Not exported.
 
 **Kind**: global class  
 
@@ -295,20 +311,6 @@ Return the value at a given index.
 | --- | --- | --- |
 | index | <code>number</code> | The index to query. Negative indexes will be treated as indexes from the end of the range. |
 
-<a name="range"></a>
-
-## range([start], stop, [step]) ⇒ [<code>Range</code>](#Range)
-Creates a Range instance.
-
-All of the parameters may be negative or floating point. If you only pass a single parameter, it will be used as `stop`. In order to pass a `step`, you must pass all three. In order to create a decreasing `Range`, you must pass a negative `step`. If you provide parameters that describe an impossible or empty range, you will receive an object that iterates 0 times.
-
-**Kind**: global function  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [start] | <code>number</code> | <code>0</code> | The start of the range. Included. |
-| stop | <code>number</code> |  | The end of the range. Excluded. |
-| [step] | <code>number</code> | <code>1</code> | The interval to increment by. |
 
 <a name="iterCallback"></a>
 
@@ -320,6 +322,7 @@ All of the parameters may be negative or floating point. If you only pass a sing
 | currentValue | <code>number</code> | The current element of the range. |
 | index | <code>number</code> | The index of the current element. |
 | range | [<code>Range</code>](#Range) | The current Range object. |
+
 
 <a name="reduceCallback"></a>
 
