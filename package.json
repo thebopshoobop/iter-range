@@ -1,20 +1,27 @@
 {
   "name": "iter-range",
   "version": "0.5.1",
-  "description": "An iterator-based range library that's here for you.",
+  "description":
+    "An iterator-based range library with superpowers (useful methods).",
+  "keywords": ["range", "iterator", "lazy", "iteration", "array", "interval"],
   "main": "lib/range.js",
   "scripts": {
-    "doc": "node ./node_modules/.bin/jsdoc2md lib/range.js --template .README.md > README.md",
-    "lint": "node ./node_modules/.bin/eslint lib",
-    "test": "node ./node_modules/.bin/jasmine",
-    "coverage": "node ./node_modules/.bin/nyc ./node_modules/.bin/jasmine",
-    "report-coverage": "node ./node_modules/.bin/nyc --reporter=lcov ./node_modules/.bin/jasmine > coverage.lcov && node ./node_modules/.bin/codecov"
+    "doc": "npx jsdoc2md lib/range.js --template .README.md > README.md",
+    "lint": "npx eslint lib",
+    "test": "npx jasmine",
+    "coverage": "npx nyc npx jasmine",
+    "report-coverage":
+      "npx nyc --reporter=lcov npx jasmine > coverage.lcov && npx codecov"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/thebopshoobop/iter-range.git"
   },
-  "author": "Will Timpson",
+  "author": {
+    "name": "Will Timpson",
+    "email": "will.timpson@gmail.com",
+    "url": "https://willt.codes"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/thebopshoobop/iter-range/issues"
@@ -31,8 +38,6 @@
     "nyc": "^11.4.1"
   },
   "nyc": {
-    "exclude": [
-      "spec"
-    ]
+    "exclude": ["spec"]
   }
 }
