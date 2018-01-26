@@ -96,7 +96,7 @@ The `Range` object methods are thoroughly tested to match their `Array.prototype
 ## range([start], stop, [step]) ⇒ [<code>Range</code>](#Range)
 Creates a Range instance. Exported.
 
-All of the parameters may be negative or floating point. If you only pass a single parameter, it will be used as `stop`. In order to pass a `step`, you must pass all three. In order to create a decreasing `Range`, you must pass a negative `step`. If you provide parameters that describe an impossible or empty range, you will receive an object that iterates 0 times.
+All of the parameters may be negative or floating point. If you only pass a single parameter, it will be used as `stop`. In order to pass a `step`, you must pass all three. In order to create a decreasing [Range](#Range), you must pass a negative `step`. If you provide parameters that describe an impossible or empty range, you will receive an object that iterates 0 times.
 
 **Kind**: global function  
 
@@ -315,6 +315,8 @@ Return the value at a given index.
 <a name="iterCallback"></a>
 
 ## iterCallback : <code>function</code>
+The function signature for the callbacks passed to the [forEach](#Range+forEach), [map](#Range+map), [every](#Range+every), [some](#Range+some), [filter](#Range+filter), [find](#Range+find), and [findIndex](#Range+findIndex) methods.
+
 **Kind**: global typedef  
 
 | Param | Type | Description |
@@ -323,10 +325,23 @@ Return the value at a given index.
 | index | <code>number</code> | The index of the current element. |
 | range | [<code>Range</code>](#Range) | The current Range object. |
 
+**Example**  
+```js
+const callback = function(currentValue, index, range) {
+  // perform some action
+}
+range(10, 0, -1).forEach(callback);
+```
+**Example**  
+```js
+range(5).map(currentValue => currentValue ** 2);
+```
 
 <a name="reduceCallback"></a>
 
 ## reduceCallback : <code>function</code>
+The function signature for the callbacks passed to the [reduce](#Range+reduce) and [reduceRight](#Range+reduceRight) methods.
+
 **Kind**: global typedef  
 
 | Param | Type | Description |
@@ -336,3 +351,14 @@ Return the value at a given index.
 | index | <code>number</code> | The index of the current element. |
 | range | [<code>Range</code>](#Range) | The current Range object. |
 
+**Example**  
+```js
+const callback = function(accumulator, currentValue, index, range) {
+  // return accumulated value
+}
+range(12).reduce(callback);
+```
+**Example**  
+```js
+range(5).reduce((accumulator, currentValue) => accumulator + currentValue);
+```
